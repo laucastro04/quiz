@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="quiz-container">
+            <h1>Boston Trivia Quiz!</h1>
+            <hr>
+            <form id="quiz-form">
+                <div class="d-flex">
+                    <div class="d-flex-container">
+                        <div class="question">
+                            <p>1. What is the nickname given to the city of Boston?</p>
+                            <div class="answrs">
+                                <label>
+                                    <input type="radio" name="q1" value="a">
+                                    Beehive Of Industry
+                                </label>
+                                <label>
+                                    <input type="radio" name="q1" value="b">
+                                    Big Easy
+                                </label>
+                                <label>
+                                    <input type="radio" name="q1" value="c">
+                                    Beantown
+                                </label>
+                                <label>
+                                    <input type="radio" name="q1" value="d">
+                                    Big D
+                                </label>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <p>2. What river separates Boston & Cambridge?</p>
+                            <div class="answrs">
+                                <label>
+                                    <input type="radio" name="q2" value="a">
+                                    Charles River
+                                </label>
+                                <label>
+                                    <input type="radio" name="q2" value="b">
+                                    Marrymack River
+                                </label>
+                                <label>
+                                    <input type="radio" name="q2" value="c">
+                                    They are not split
+                                </label>
+                                <label>
+                                    <input type="radio" name="q2" value="d">
+                                    Muddy River
+                                </label>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <p>3. From which Boston museum were $200 million worth of paintings stolen in 1990?</p>
+                            <div class="answrs">
+                                <label>
+                                    <input type="radio" name="q3" value="a">
+                                    Museum of Fine Arts
+                                </label>
+                                <label>
+                                    <input type="radio" name="q3" value="b">
+                                    Isabella Stewert Gardner Museum
+                                </label>
+                                <label>
+                                    <input type="radio" name="q3" value="c">
+                                    Institute of Contemporary Art
+                                </label>
+                                <label>
+                                    <input type="radio" name="q3" value="d">
+                                    Harvard museum
+                                </label>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <p>4. Where in Boston would you ride the "Swan Boats"?</p>
+                            <div class="answrs">
+                                <label>
+                                    <input type="radio" name="q4" value="a">
+                                    Charles River Esplenade 
+                                </label>
+                                <label>
+                                    <input type="radio" name="q4" value="b">
+                                    Boston Common
+                                </label>
+                                <label>
+                                    <input type="radio" name="q4" value="c">
+                                    The Fens
+                                </label>
+                                <label>
+                                    <input type="radio" name="q4" value="d">
+                                    Boston Public Garden
+                                </label>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <p>5. What is the name of the first public beach in America, ocated outside of Boston?</p>
+                            <div class="answrs">
+                                <label>
+                                    <input type="radio" name="q5" value="a">
+                                    Carson Beach
+                                </label>
+                                <label>
+                                    <input type="radio" name="q5" value="b">
+                                    Revere Beach
+                                </label>
+                                <label>
+                                    <input type="radio" name="q5" value="c">
+                                    Castle Island Beach
+                                </label>
+                                <label>
+                                    <input type="radio" name="q5" value="d">
+                                    Pleasure Bay Beach
+                                </label>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <p>6. What is the six-mile chain of parks running from Fenway to Arnold Arboretum known as in Boston?</p>
+                            <div class="answrs">
+                                <label>
+                                    <input type="radio" name="q6" value="a">
+                                    Emeral Necklace
+                                </label>
+                                <label>
+                                    <input type="radio" name="q6" value="b">
+                                    Emerald Line
+                                </label>
+                                <label>
+                                    <input type="radio" name="q6" value="c">
+                                    Emerald Park
+                                </label>
+                                <label>
+                                    <input type="radio" name="q6" value="d">
+                                    Emerald Chain
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn">
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+            <div class="result" id="result"></div>
+        </div>
+        <script type="text/javascript">
+            const quizForm = document.getElementById('quiz-form');
+            const resultDiv = document.getElementById('result');
+            const correctAnswers = ['c','a','b','d','b','a'];
+            const btn = document.querySelector('.submit-btn');
+
+            btn.addEventListener('click', () => {
+                btn.style.backgroundColor = '#66ff00';
+                btn.style.boxShadow = '0 0 40px #66ff00';
+            });
+
+            quizForm.addEventListener('submit' ,e=>{
+                e.preventDefault();
+
+                let score = 0;
+                const userAnswer = [quizForm.q1.value,quizForm.q2.value,quizForm.q3.value,quizForm.q4.value,quizForm.q5.value,quizForm.q6.value];
+                userAnswer.forEach((answer,index) => {
+                    if(answer === correctAnswers[index]){
+                        score +=1;
+                    }
+                });
+                if(score<3){
+                    resultDiv.innerHTML = `Your score is ${score}, You don't know Boston`;
+                }
+                if(score>=3 && score<=4){
+                    resultDiv.innerHTML = `Your score is ${score}, You kinda know Boston`;
+                }
+                if(score == 5){
+                    resultDiv.innerHTML = `Your score is ${score}, You know Boston`;
+                }
+                if(score == 6){
+                    resultDiv.innerHTML = `Your score is ${score}, You are a Bostonian!`;
+                }
+            });
+        </script>
+    </body>
+</html>
